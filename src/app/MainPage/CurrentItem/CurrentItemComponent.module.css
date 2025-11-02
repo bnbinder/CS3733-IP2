@@ -1,0 +1,68 @@
+.roundedbox {
+    background-color: #e5e7eb;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 400px;
+    height: 500px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 420px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: normal;
+    list-style-type: none;
+}
+
+.par {
+    color: black;
+    margin: 20px;
+}
+
+.name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    line-height: 1.2;
+}
+
+.initialBid {
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-block;
+    width: 100%;
+    line-height: 1;
+}
+
+.description {
+    font-size: 0.9rem;
+    display: block;
+    width: 100%;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.sellItem {
+    background-color: #e5e7eb;
+    padding: 2px;
+    color: black;
+    font-size: 30px;
+    width: 400px;
+    height: 80px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
