@@ -4,7 +4,7 @@ import styles from "./MainPage.module.css";
 import { useSearchParams } from "next/navigation";
 import ListComponent from "./ListItem/ListComponent";
 import React from "react";
-import { Bid, Item, Model } from '@/model';
+import { Item, Model } from '@/model';
 import CurrentItemComponent from "./CurrentItem/CurrentItemComponent";
 import AddItem from "./AddItem/AddItem";
 import SoldItemComponent from "./SoldItem/SoldItemComponent";

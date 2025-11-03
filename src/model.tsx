@@ -111,13 +111,15 @@ export class Model {
             }
         });
         if (item.getInitialBid() >= 0) {
-            if (item.getBids.length != 0) {
-                this.totalFunds += Math.max(...item.getBids().map(bid => bid.getBid()));
+            var topBid: number = Math.max(...item.getBids().map(bid => bid.getBid()))
+            var iteminitbid: number = item.getInitialBid()
+            if (item.getBids().length != 0 && topBid > iteminitbid) {
+                this.totalFunds += topBid - iteminitbid;
                 console.log(this.totalFunds)
+                item.setAuctioned();
+                this.itemsSold.push(item);
+                this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
             }
-            item.setAuctioned();
-            this.itemsSold.push(item);
-            this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
         }
         else {
             alert("cant sell what isnt real. words to live by")
