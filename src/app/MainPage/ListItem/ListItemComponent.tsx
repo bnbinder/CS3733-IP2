@@ -19,7 +19,7 @@ function ListComponent(props: any) {
 
     function deleteItem() {
         model.removeItem(props.item.getKey());
-        sendItem(new Item("", 0, ""))
+        sendItem(new Item("", -1, ""))
         andRefreshDisplay();
     }
 
@@ -31,12 +31,14 @@ function ListComponent(props: any) {
             <div className={styles.bid}>
                 <p className={styles.par}>Initial Bid: {props.item.initialBid}</p>
             </div>
-            <div className={styles.remove}>
-                <button onClick={(e) => {
-                    e.stopPropagation(); // prevents div's onClick
-                    deleteItem();
-                }}>Remove</button>
-            </div>
+            {!props.model.getAuctionStarted() && (
+                <div className={styles.remove}>
+                    <button onClick={(e) => {
+                        e.stopPropagation(); // prevents div's onClick
+                        deleteItem();
+                    }}>Remove</button>
+                </div>
+            )}
         </div>
     );
 }

@@ -29,7 +29,7 @@ function ListComponent(props: any) {
             alert("can you please type something? thanks. cant bid on nothing.")
             return
         }
-        else if (Number.isNaN(formData.initialBid)){
+        else if (Number.isNaN(formData.initialBid)) {
             alert("can you please type a number? thanks.")
             return
         }
@@ -75,8 +75,12 @@ function ListComponent(props: any) {
             </div>
             <br />
             <div className={styles.buttons}>
-                <button onClick={addItem} type="submit" className={styles.additem}>Add Item</button>
-                <button onClick={addItem} type="submit" className={styles.additem}>Add Bid</button>
+                {!props.started() && (
+                    <button onClick={addItem} type="submit" className={styles.additem}>Add Item</button>
+                )}
+                {props.started() && (
+                    <button onClick={addItem} type="submit" className={styles.additem}>Add Bid</button>
+                )}
             </div>
         </div>
     );

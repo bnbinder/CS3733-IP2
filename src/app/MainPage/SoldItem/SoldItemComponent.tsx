@@ -17,6 +17,7 @@ function ListComponent(props: any) {
         props.sendUp(item);
         andRefreshDisplay();
     };
+    
 
     return (
         <div>
@@ -25,7 +26,7 @@ function ListComponent(props: any) {
                 <ul id="items" className={styles.list}>
                     {model.getSoldItems().map((item: Item) => (
                         <li key={item.getKey()} onClick={() => sendItem(item)}>
-                            <ListItemComponent item={item} />
+                            <ListItemComponent  item={item} model={model} refreshDisplay={andRefreshDisplay} sendUp={sendItem} />
                         </li>
                     ))}
                 </ul>

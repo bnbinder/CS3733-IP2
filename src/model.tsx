@@ -32,13 +32,21 @@ export class Item {
     getKey() {
         return this.key;
     }
+
+    getAuctioned() {
+        return this.auctioned;
+    }
+
+    setAuctioned() {
+        this.auctioned = true;
+    }
 }
 
 export class Model {
     private itemsToAuction: Item[];
-    private itemsSold : Item[];
+    private itemsSold: Item[];
     private auctionName: string;
-    private isAuctionStarted : boolean
+    private isAuctionStarted: boolean
 
     constructor(auctionName: string) {
         this.itemsToAuction = []
@@ -51,39 +59,47 @@ export class Model {
         this.itemsToAuction.push(new Item(name, initialBid, description));
     }
 
-    removeItem(key : number){
-        var item : Item = new Item("",0,"");
+    removeItem(key: number) {
+        var item: Item = new Item("", 0, "");
         this.itemsToAuction.forEach(itemm => {
-            if(itemm.getKey() == key){
+            if (itemm.getKey() == key) {
                 item = itemm;
             }
         });
         this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
     }
-    sellItem(key : number){
-        var item : Item = new Item("",0,"");
+    sellItem(key: number) {
+        var item: Item = new Item("", 0, "");
         this.itemsToAuction.forEach(itemm => {
-            if(itemm.getKey() == key){
+            if (itemm.getKey() == key) {
                 item = itemm;
             }
         });
-        this.itemsSold.push(item);
-        this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
+        if (item) {
+            if (item.getAuctioned()) {
+                alert("cant sell what has been sold. words to live by")
+            }
+            else {
+                item.setAuctioned();
+                this.itemsSold.push(item);
+                this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
+            }
+        }
     }
 
     getItems(): Item[] {
         return this.itemsToAuction;
     }
 
-    getSoldItems(): Item[]{
+    getSoldItems(): Item[] {
         return this.itemsSold;
     }
 
-    getAuctionStarted(): boolean{
-        return this.isAuctionStarted;
+    startAuction() {
+        this.isAuctionStarted = true
     }
 
-    startAuction() {
-        this.isAuctionStarted = !(this.isAuctionStarted);
+    getAuctionStarted(): boolean {
+        return this.isAuctionStarted;
     }
 }

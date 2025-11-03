@@ -13,7 +13,7 @@ export default function MainPage() {
     const searchParams = useSearchParams();
     const eventStr = searchParams.get("name") || "No Event Name Given";
     const [model, setModel] = React.useState(new Model(eventStr))
-    const [item, setItem] = React.useState(new Item("", 0, ""));
+    const [item, setItem] = React.useState(new Item("", -1, ""));
 
     const [redraw, forceRedraw] = React.useState(0)
 
@@ -30,6 +30,12 @@ export default function MainPage() {
         return model.getAuctionStarted();
     }
 
+    function inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam()
+    {
+        alert("test")
+        andRefreshDisplay();
+    }
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -38,14 +44,17 @@ export default function MainPage() {
                     {!model.getAuctionStarted() && (
                         <button onClick={start} className={styles.startauction}>Start Auction</button>
                     )}
+                    {model.getAuctionStarted() && (
+                        <button onClick={inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam} className={styles.startauction}>End Auction</button>
+                    )}
                 </div>
                 <br />
                 <div className={styles.info}>
                     <ListComponent refreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
-                    <CurrentItemComponent refreshDisplay={andRefreshDisplay} model={model} item={item}
+                    <CurrentItemComponent refreshDisplay={andRefreshDisplay} model={model} item={item} sendUp={setItem}
                         started={getStarted} />
-                    <AddItem refreshDisplay={andRefreshDisplay} model={model} />
-                    <SoldItemComponent refreshDisplay={andRefreshDisplay} model={model} />
+                    <AddItem refreshDisplay={andRefreshDisplay} model={model} started={getStarted} />
+                    <SoldItemComponent refreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
                 </div>
             </main>
         </div>

@@ -1,9 +1,10 @@
 "use client";
 
+import { Item } from "@/model";
 import styles from "./CurrentItemComponent.module.css";
 
 function ListComponent(props: any) {
-
+    /*
     function ihatejavascript() {
         console.log(props.started() + " i hate javascript")
         return props.started()
@@ -15,9 +16,14 @@ function ListComponent(props: any) {
         //make me beleive there are sinister forces. 
         //god bless java
     }
+    */
 
     function sellItem() {
-        console.log("model is not working :(")
+        if (props.item.initialBid != -1) {
+            props.model.sellItem(props.item.getKey())
+        }
+        props.sendUp(new Item("", -1, ""))
+        props.refreshDisplay();
     }
 
     return (
@@ -27,7 +33,7 @@ function ListComponent(props: any) {
                 <li className={styles.initialBid}><p className={styles.par}>Initial Bid: {props.item ? props.item.initialBid : null}</p></li>
                 <li className={styles.description}><p className={styles.par}>{props.item ? props.item.description : null}</p></li>
             </ul>
-            {ihatejavascript() && (
+            {props.started() && (
                 <button onClick={sellItem} type="submit" className={styles.sellItem}>Sell Item</button>
             )}
         </div>
