@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "./ListItemComponent.module.css";
+import styles from "./ListBidComponent.module.css";
 import { Item } from "@/model";
 
 function ListComponent(props: any) {
@@ -12,32 +12,24 @@ function ListComponent(props: any) {
         props.refreshDisplay();
     }
 
-    const sendItem = (item: Item) => {
-        if (!item.getAuctioned()) {
-            props.sendUp(item);
-        }
-        andRefreshDisplay();
-    };
-
-    function deleteItem() {
-        model.removeItem(props.item.getKey());
-        sendItem(new Item("", -1, ""))
+    function deleteBid() {
+        props.item.removeBid(props.bid.getKey());
         andRefreshDisplay();
     }
 
     return (
-        <div onClick={() => sendItem(props.item)} className={styles.roundedbox}>
+        <div className={styles.roundedbox}>
             <div className={styles.name}>
-                <p className={styles.par}>{props.item.name}</p>
+                <p className={styles.par}>{props.bid.name}</p>
             </div>
             <div className={styles.bid}>
-                <p className={styles.par}>Initial Bid: {props.item.initialBid}</p>
+                <p className={styles.par}>Bid: {props.bid.bid}</p>
             </div>
             {!props.model.getAuctionStarted() && (
                 <div className={styles.remove}>
                     <button onClick={(e) => {
                         e.stopPropagation(); // prevents div's onClick
-                        deleteItem();
+                        deleteBid();
                     }}>Remove</button>
                 </div>
             )}

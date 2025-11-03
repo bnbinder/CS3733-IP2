@@ -39,10 +39,25 @@ function ListComponent(props: any) {
         andRefreshDisplay()
     }
 
+    const addBids = () => {
+        if (formData.name == "" || formData.description == "") {
+            alert("can you please type something? thanks. we need the guy to exist.")
+            return
+        }
+        else if (Number.isNaN(formData.initialBid)) {
+            alert("can you please type a number? thanks.")
+            return
+        }
+        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned()) {
+            props.item.addBid(formData.name, formData.initialBid, formData.description)
+        }
+        andRefreshDisplay()
+    }
+
     return (
         <div>
             <div className={styles.roundedbox}>
-                <form onSubmit={addItem}>
+                <form>
                     <label className={styles.name}>
                         Name:
                         <input
@@ -79,7 +94,7 @@ function ListComponent(props: any) {
                     <button onClick={addItem} type="submit" className={styles.additem}>Add Item</button>
                 )}
                 {props.started() && (
-                    <button onClick={addItem} type="submit" className={styles.additem}>Add Bid</button>
+                    <button onClick={addBids} type="submit" className={styles.additem}>Add Bid</button>
                 )}
             </div>
         </div>

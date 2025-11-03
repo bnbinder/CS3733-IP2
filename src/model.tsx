@@ -2,11 +2,17 @@ export class Bid {
     private name: string;
     private bid: number;
     private imageSrc: string;
+    private key: number;
 
     constructor(name: string, bid: number, description: string) {
         this.name = name;
         this.bid = bid;
         this.imageSrc = "do i really want to implement this";
+        this.key = Date.now();
+    }
+
+    getKey() {
+        return this.key;
     }
 }
 
@@ -16,7 +22,7 @@ export class Item {
     private description: string;
     private imageSrc: string;
     private auctioned: boolean;
-    private bidders: Bid[];
+    private bids: Bid[];
     key: number;
 
     constructor(name: string, initialBid: number, description: string) {
@@ -25,8 +31,22 @@ export class Item {
         this.description = description;
         this.imageSrc = "do i really want to implement this";
         this.auctioned = false;
-        this.bidders = [];
+        this.bids = [];
         this.key = Date.now();
+    }
+
+    removeBid(key: number) {
+        var bid: Bid = new Bid("", 0, "");
+        this.bids.forEach(bidd => {
+            if (bidd.getKey() == key) {
+                bid = bidd;
+            }
+        });
+        this.bids.splice(this.bids.indexOf(bid), 1)
+    }
+
+    addBid(name: string, initialBid: number, description: string): void {
+        this.bids.push(new Bid(name, initialBid, description));
     }
 
     getKey() {
@@ -39,6 +59,14 @@ export class Item {
 
     setAuctioned() {
         this.auctioned = true;
+    }
+
+    getBids() {
+        return this.bids
+    }
+
+    getInitialBid() {
+        return this.initialBid;
     }
 }
 
@@ -68,6 +96,7 @@ export class Model {
         });
         this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
     }
+
     sellItem(key: number) {
         var item: Item = new Item("", 0, "");
         this.itemsToAuction.forEach(itemm => {
