@@ -16,7 +16,6 @@ export default function MainPage() {
     const [model, setModel] = React.useState(new Model(eventStr))
 
     const [item, setItem] = React.useState(new Item("", -1, ""));
-    const [bid, setBid] = React.useState(new Bid("", -1, ""));
 
     const [redraw, forceRedraw] = React.useState(0)
 
@@ -47,7 +46,10 @@ export default function MainPage() {
                         <button onClick={start} className={styles.startauction}>Start Auction</button>
                     )}
                     {model.getAuctionStarted() && (
-                        <button onClick={inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam} className={styles.startauction}>End Auction</button>
+                        <div>
+                            <h2>Total Funds: {0 + model.getTotalFunds()}</h2>
+                            <button onClick={inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam} className={styles.startauction}>End Auction</button>
+                        </div>
                     )}
                 </div>
                 <br />

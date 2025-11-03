@@ -51,6 +51,8 @@ function ListComponent(props: any) {
         if (props.item.getInitialBid() != -1 && !props.item.getAuctioned()) {
             props.item.addBid(formData.name, formData.initialBid, formData.description)
         }
+
+        setFormData({ name: "", initialBid: 0, description: "" })
         andRefreshDisplay()
     }
 

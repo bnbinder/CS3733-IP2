@@ -21,7 +21,6 @@ function ListComponent(props: any) {
     function sellItem() {
         if (props.item.initialBid != -1) {
             props.model.sellItem(props.item.getKey())
-            props.item.setAuctioned();
         }
         props.sendUp(new Item("", -1, ""))
         props.refreshDisplay();

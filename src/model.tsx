@@ -14,6 +14,10 @@ export class Bid {
     getKey() {
         return this.key;
     }
+
+    getBid() {
+        return this.bid
+    }
 }
 
 export class Item {
@@ -75,12 +79,14 @@ export class Model {
     private itemsSold: Item[];
     private auctionName: string;
     private isAuctionStarted: boolean
+    private totalFunds: number
 
     constructor(auctionName: string) {
         this.itemsToAuction = []
         this.itemsSold = []
         this.auctionName = auctionName;
         this.isAuctionStarted = false;
+        this.totalFunds = 0;
     }
 
     addItem(name: string, initialBid: number, description: string): void {
@@ -98,21 +104,23 @@ export class Model {
     }
 
     sellItem(key: number) {
-        var item: Item = new Item("", 0, "");
+        var item: Item = new Item("", -1, "");
         this.itemsToAuction.forEach(itemm => {
             if (itemm.getKey() == key) {
                 item = itemm;
             }
         });
-        if (item) {
-            if (item.getAuctioned()) {
-                alert("cant sell what has been sold. words to live by")
+        if (item.getInitialBid() >= 0) {
+            if (item.getBids.length != 0) {
+                this.totalFunds += Math.max(...item.getBids().map(bid => bid.getBid()));
+                console.log(this.totalFunds)
             }
-            else {
-                item.setAuctioned();
-                this.itemsSold.push(item);
-                this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
-            }
+            item.setAuctioned();
+            this.itemsSold.push(item);
+            this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
+        }
+        else {
+            alert("cant sell what isnt real. words to live by")
         }
     }
 
@@ -130,5 +138,9 @@ export class Model {
 
     getAuctionStarted(): boolean {
         return this.isAuctionStarted;
+    }
+
+    getTotalFunds() {
+        return this.totalFunds;
     }
 }

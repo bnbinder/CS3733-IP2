@@ -6,8 +6,6 @@ import { Item } from "@/model";
 
 function ListComponent(props: any) {
 
-    const [model, setModel] = React.useState(props.model)
-
     function andRefreshDisplay() {
         props.refreshDisplay();
     }
