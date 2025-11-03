@@ -26,6 +26,8 @@ export class Item {
     private description: string;
     private imageSrc: string;
     private auctioned: boolean;
+    private itemBeingBidded: boolean;
+
     private bids: Bid[];
     key: number;
 
@@ -37,6 +39,7 @@ export class Item {
         this.auctioned = false;
         this.bids = [];
         this.key = Date.now();
+        this.itemBeingBidded = false;
     }
 
     removeBid(key: number) {
@@ -72,6 +75,14 @@ export class Item {
     getInitialBid() {
         return this.initialBid;
     }
+
+    itemISbeingBiddedOn() {
+        this.itemBeingBidded = true;
+    }
+
+    getItemBeingBidded() {
+        return this.itemBeingBidded;
+    }
 }
 
 export class Model {
@@ -80,6 +91,7 @@ export class Model {
     private auctionName: string;
     private isAuctionStarted: boolean
     private totalFunds: number
+    private itemBeingBidded: boolean;
 
     constructor(auctionName: string) {
         this.itemsToAuction = []
@@ -87,6 +99,7 @@ export class Model {
         this.auctionName = auctionName;
         this.isAuctionStarted = false;
         this.totalFunds = 0;
+        this.itemBeingBidded = false;
     }
 
     addItem(name: string, initialBid: number, description: string): void {
@@ -144,5 +157,13 @@ export class Model {
 
     getTotalFunds() {
         return this.totalFunds;
+    }
+
+    itemISbeingBiddedOn() {
+        this.itemBeingBidded = true;
+    }
+
+    getItemBeingBidded() {
+        return this.itemBeingBidded;
     }
 }

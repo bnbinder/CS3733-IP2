@@ -26,6 +26,13 @@ function ListComponent(props: any) {
         props.refreshDisplay();
     }
 
+    function startBidForItem() {
+        props.item.itemISbeingBiddedOn()
+        props.model.itemISbeingBiddedOn()
+        props.refreshDisplay();
+        props.refreshDisplay();
+    }
+
     return (
         <div className={styles.roundedbox}>
             <ul id="items" className={styles.list}>
@@ -33,8 +40,11 @@ function ListComponent(props: any) {
                 <li className={styles.initialBid}><p className={styles.par}>Initial Bid: {props.item ? props.item.initialBid : null}</p></li>
                 <li className={styles.description}><p className={styles.par}>{props.item ? props.item.description : null}</p></li>
             </ul>
-            {props.started() && (
+            {props.started() && props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && props.item.getInitialBid() != -1 && (
                 <button onClick={sellItem} type="submit" className={styles.sellItem}>Sell Item</button>
+            )}
+            {props.started() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded() && props.item.getInitialBid() != -1 && (
+                <button onClick={startBidForItem} type="submit" className={styles.sellItem}>Start Auction</button>
             )}
         </div>
     );

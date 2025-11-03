@@ -56,6 +56,10 @@ function ListComponent(props: any) {
         andRefreshDisplay()
     }
 
+    function warningTextConditional() {
+        return props.started() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded()
+    }
+
     return (
         <div>
             <div className={styles.roundedbox}>
@@ -95,8 +99,14 @@ function ListComponent(props: any) {
                 {!props.started() && (
                     <button onClick={addItem} type="submit" className={styles.additem}>Add Item</button>
                 )}
-                {props.started() && (
+                {props.started() && props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
                     <button onClick={addBids} type="submit" className={styles.additem}>Add Bid</button>
+                )}
+                {props.started() && !props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
+                    <h3 className={styles.addItem}>Something Is Currently Being Auctioned</h3>
+                )}
+                {warningTextConditional() && (
+                    <h1 className={styles.addItem} key = {"e"}>Please Start An Auction</h1>
                 )}
             </div>
         </div>
