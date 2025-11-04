@@ -48,8 +48,11 @@ function ListComponent(props: any) {
             alert("can you please type a number? thanks.")
             return
         }
-        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned()) {
+        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() <= formData.initialBid) {
             props.item.addBid(formData.name, formData.initialBid, formData.description)
+        }
+        else {
+            alert("the bid needs to be higher than the inital bid!!! thanks")
         }
 
         setFormData({ name: "", initialBid: 0, description: "" })
