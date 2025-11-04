@@ -31,17 +31,27 @@ function ListComponent(props: any) {
                 <p className={styles.par}>{props.item.name}</p>
             </div>
             <div className={styles.bid}>
-                <p className={styles.par}>Initial Bid: {props.item.initialBid}</p>
+                {(!props.model.getAuctionStarted() &&
+                    < p className={styles.par}>Initial Bid: {props.item.initialBid}</p>
+                )}
+                {(props.model.getAuctionStarted() && props.item.getAuctioned() &&
+                    <div>
+                        <p className={styles.par}>Final Bid: {props.item.getTopBid().getBid()}</p>
+                        <p className={styles.par}>Name: {props.item.getTopBid().getName()}</p>
+                    </div>
+                )}
             </div>
-            {!props.model.getAuctionStarted() && (
-                <div className={styles.remove}>
-                    <button onClick={(e) => {
-                        e.stopPropagation(); // prevents div's onClick
-                        deleteItem();
-                    }}>Remove</button>
-                </div>
-            )}
-        </div>
+            {
+                !props.model.getAuctionStarted() && (
+                    <div className={styles.remove}>
+                        <button onClick={(e) => {
+                            e.stopPropagation(); // prevents div's onClick
+                            deleteItem();
+                        }}>Remove</button>
+                    </div>
+                )
+            }
+        </div >
     );
 }
 

@@ -18,6 +18,10 @@ export class Bid {
     getBid() {
         return this.bid
     }
+
+    getName() {
+        return this.name
+    }
 }
 
 export class Item {
@@ -27,8 +31,8 @@ export class Item {
     private imageSrc: string;
     private auctioned: boolean;
     private itemBeingBidded: boolean;
-
     private bids: Bid[];
+    private topBid: Bid;
     key: number;
 
     constructor(name: string, initialBid: number, description: string) {
@@ -40,6 +44,7 @@ export class Item {
         this.bids = [];
         this.key = Date.now();
         this.itemBeingBidded = false;
+        this.topBid = new Bid("", -1, "")
     }
 
     removeBid(key: number) {
@@ -80,8 +85,20 @@ export class Item {
         this.itemBeingBidded = true;
     }
 
+    itemISNOTbeingBiddedOn() {
+        this.itemBeingBidded = false;
+    }
+
     getItemBeingBidded() {
         return this.itemBeingBidded;
+    }
+
+    setTopBid(bid:Bid) {
+        this.topBid = bid
+    }
+
+    getTopBid() {
+        return this.topBid
     }
 }
 
@@ -123,13 +140,18 @@ export class Model {
                 item = itemm;
             }
         });
-        if (item.getInitialBid() >= 0) {
+        if (item.getInitialBid() >= 0 && item.getBids().length != 0) {
             var topBid: number = Math.max(...item.getBids().map(bid => bid.getBid()))
+            var topBidObject = item.getBids().reduce((max, bid) =>
+                bid.getBid() > max.getBid() ? bid : max)
             var iteminitbid: number = item.getInitialBid()
-            if (item.getBids().length != 0 && topBid > iteminitbid) {
+            if (topBid > iteminitbid) {
                 this.totalFunds += topBid - iteminitbid;
+                item.setTopBid(topBidObject);
                 console.log(this.totalFunds)
                 item.setAuctioned();
+                item.itemISNOTbeingBiddedOn();
+                this.itemISNOTbeingBiddedOn();
                 this.itemsSold.push(item);
                 this.itemsToAuction.splice(this.itemsToAuction.indexOf(item), 1)
             }
@@ -161,6 +183,10 @@ export class Model {
 
     itemISbeingBiddedOn() {
         this.itemBeingBidded = true;
+    }
+
+    itemISNOTbeingBiddedOn() {
+        this.itemBeingBidded = false;
     }
 
     getItemBeingBidded() {

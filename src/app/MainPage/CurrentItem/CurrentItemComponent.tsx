@@ -43,7 +43,7 @@ function ListComponent(props: any) {
             {props.started() && props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && props.item.getInitialBid() != -1 && (
                 <button onClick={sellItem} type="submit" className={styles.sellItem}>Sell Item</button>
             )}
-            {props.started() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded() && props.item.getInitialBid() != -1 && (
+            {props.started() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded() && props.item.getInitialBid() != -1 && !props.item.getAuctioned() && (
                 <button onClick={startBidForItem} type="submit" className={styles.sellItem}>Start Auction</button>
             )}
         </div>

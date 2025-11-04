@@ -23,7 +23,7 @@ function ListComponent(props: any) {
             <div className={styles.bid}>
                 <p className={styles.par}>Bid: {props.bid.bid}</p>
             </div>
-            {props.model.getAuctionStarted() && (
+            {props.model.getAuctionStarted() && !props.item.getAuctioned() && (
                 <div className={styles.remove}>
                     <button onClick={(e) => {
                         e.stopPropagation(); // prevents div's onClick
