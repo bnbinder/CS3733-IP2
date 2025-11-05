@@ -2,8 +2,17 @@
 
 import React from "react";
 import styles from "./AddItem.module.css";
+import { Item, Model } from "@/model";
 
-export default function AddItem(props: any) {
+export interface AddItemProps {
+    item: Item
+    model: Model
+    andRefreshDisplay: () => void
+    getStarted: () => boolean
+}
+
+
+export default function AddItem(props: AddItemProps) {
     const [formData, setFormData] = React.useState({
         name: '',
         initialBid: 0,
@@ -104,7 +113,7 @@ export default function AddItem(props: any) {
                     <h3 className={styles.addItem}>Something Is Currently Being Auctioned</h3>
                 )}
                 {pleaseStartAuctionConditional() && (
-                    <h1 className={styles.addItem} key = {"e"}>Please Start An Auction</h1>
+                    <h1 className={styles.addItem} key={"e"}>Please Start An Auction</h1>
                 )}
             </div>
         </div>

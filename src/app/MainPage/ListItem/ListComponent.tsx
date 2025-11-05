@@ -1,10 +1,16 @@
 "use client";
 
 import styles from "./ListComponent.module.css";
-import { Item } from "@/model";
+import { Item, Model } from "@/model";
 import ListItemComponent from "./ListItemComponent";
 
-export default function ListComponent(props: any) {
+interface ListComponentProps {
+    model: Model
+    sendUp: (item: Item) => void
+    andRefreshDisplay: () => void
+}
+
+export default function ListComponent(props: ListComponentProps) {
 
     function sendUp(item: Item) {
         props.sendUp(item);

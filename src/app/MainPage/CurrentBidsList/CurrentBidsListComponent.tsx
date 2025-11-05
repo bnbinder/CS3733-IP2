@@ -1,10 +1,16 @@
 "use client";
 
 import styles from "./CurrentBidsListComponent.module.css";
-import { Bid, Item } from "@/model";
+import { Bid, Item, Model } from "@/model";
 import ListBidComponent from "./ListBidComponent";
 
-export default function CurrentBidsListComponent(props: any) {
+interface CurrentBidsListComponentProps {
+    item: Item
+    model: Model
+    andRefreshDisplay: () => void
+}
+
+export default function CurrentBidsListComponent(props: CurrentBidsListComponentProps) {
 
     return (
         <div>
@@ -13,7 +19,7 @@ export default function CurrentBidsListComponent(props: any) {
                 <ul id="items" className={styles.list}>
                     {props.item.getBids().toReversed().map((bid: Bid) => (
                         <li key={bid.getKey()}>
-                            <ListBidComponent bid = {bid} item={props.item} model={props.model} andRefreshDisplay={props.andRefreshDisplay}/>
+                            <ListBidComponent bid={bid} item={props.item} model={props.model} andRefreshDisplay={props.andRefreshDisplay} />
                         </li>
                     ))}
                 </ul>

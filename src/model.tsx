@@ -1,4 +1,10 @@
-export class Bid {
+interface IBid {
+    getKey: () => number
+    getBid: () => number
+    getName: () => string
+}
+
+export class Bid implements IBid {
     private name: string;
     private bid: number;
     private imageSrc: string;
@@ -24,7 +30,24 @@ export class Bid {
     }
 }
 
-export class Item {
+interface IItem {
+    removeBid: (key: number) => void
+    addBid: (name: string, initialBid: number, description: string) => void
+    getKey: () => number
+    getAuctioned: () => boolean
+    setAuctioned: () => void
+    getBids: () => Bid[]
+    getInitialBid: () => number
+    itemISbeingBiddedOn: () => void
+    itemISNOTbeingBiddedOn: () => void
+    getItemBeingBidded: () => boolean
+    setTopBid: (bid: Bid) => void
+    getTopBid: () => Bid
+    getName: () => string
+    getDescription: () => string
+}
+
+export class Item implements IItem {
     private name: string;
     private initialBid: number;
     private description: string;
@@ -110,7 +133,21 @@ export class Item {
     }
 }
 
-export class Model {
+interface IModel {
+    addItem: (name: string, initialBid: number, description: string) => void
+    removeItem: (key: number) => void
+    sellItem: (key: number) => void
+    getItems: () => Item[]
+    getSoldItems: () => Item[]
+    startAuction: () => void
+    getAuctionStarted: () => boolean
+    getTotalFunds: () => number
+    itemISbeingBiddedOn: () => void
+    itemISNOTbeingBiddedOn: () => void
+    getItemBeingBidded: () => boolean
+}
+
+export class Model implements IModel {
     private itemsToAuction: Item[];
     private itemsSold: Item[];
     private auctionName: string;

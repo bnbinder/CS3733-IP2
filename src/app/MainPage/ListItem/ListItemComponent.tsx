@@ -1,9 +1,16 @@
 "use client";
 
 import styles from "./ListItemComponent.module.css";
-import { Item } from "@/model";
+import { Item, Model } from "@/model";
 
-export default function ListItemComponent(props: any) {
+interface ListItemComponentProps {
+    model: Model
+    item: Item
+    andRefreshDisplay: () => void
+    sendUp: (item: Item) => void
+}
+
+export default function ListItemComponent(props: ListItemComponentProps) {
 
     function sendUp(item: Item) {
         if (!item.getAuctioned()) {
@@ -25,7 +32,7 @@ export default function ListItemComponent(props: any) {
             </div>
             <div className={styles.bid}>
                 {(!props.model.getAuctionStarted() &&
-                    < p className={styles.par}>Initial Bid: {props.item.initialBid}</p>
+                    < p className={styles.par}>Initial Bid: {props.item.getInitialBid()}</p>
                 )}
                 {(props.model.getAuctionStarted() && props.item.getAuctioned() &&
                     <div>

@@ -1,12 +1,18 @@
 "use client";
 
-import { Item } from "@/model";
+import { Item, Model } from "@/model";
 import styles from "./SoldItemComponent.module.css"
 import ListItemComponent from "../ListItem/ListItemComponent";
 
-export default function SoldItemComponent(props: any) {
+interface SoldItemComponentProps {
+    model: Model
+    andRefreshDisplay: () => void
+    sendUp: (item: Item) => void
+}
 
-    function sendUp (item: Item) {
+export default function SoldItemComponent(props: SoldItemComponentProps) {
+
+    function sendUp(item: Item) {
         props.sendUp(item);
         props.andRefreshDisplay();
     };
@@ -18,7 +24,7 @@ export default function SoldItemComponent(props: any) {
                 <ul id="items" className={styles.list}>
                     {props.model.getSoldItems().map((item: Item) => (
                         <li key={item.getKey()} onClick={() => sendUp(item)}>
-                            <ListItemComponent  item={item} model={props.model} andRefreshDisplay={props.andRefreshDisplay} sendUp={sendUp} />
+                            <ListItemComponent item={item} model={props.model} andRefreshDisplay={props.andRefreshDisplay} sendUp={sendUp} />
                         </li>
                     ))}
                 </ul>
