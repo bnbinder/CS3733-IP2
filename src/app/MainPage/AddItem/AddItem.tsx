@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./AddItem.module.css";
-import { Item, Model } from "@/model";
+import { Bid, Item, Model } from "@/model";
 
 export interface AddItemProps {
     item: Item
@@ -44,6 +44,12 @@ export default function AddItem(props: AddItemProps) {
     }
 
     function addBids() {
+        var topBidObject: Bid = new Bid("", 0, "")
+        if (props.item.getBids().length != 0) {
+            topBidObject = props.item.getBids().reduce((max, bid) =>
+                bid.getBid() > max.getBid() ? bid : max)
+        }
+
         if (formData.name == "") {
             alert("can you please type something? thanks. we need the guy to exist.")
             return
@@ -52,7 +58,7 @@ export default function AddItem(props: AddItemProps) {
             alert("can you please type a number? thanks.")
             return
         }
-        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() <= formData.initialBid) {
+        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() < formData.initialBid && topBidObject.getBid() < formData.initialBid) {
             props.item.addBid(formData.name, formData.initialBid, formData.description)
         }
         else {
@@ -81,7 +87,9 @@ export default function AddItem(props: AddItemProps) {
                         />
                     </label>
                     <label className={styles.initialBid}>
-                        Bid:
+                        {!props.getStarted() ? (
+                            "Initial Bid:"
+                        ) : "Bid"}
                         <input
                             type="number"
                             className={styles.inputBid}

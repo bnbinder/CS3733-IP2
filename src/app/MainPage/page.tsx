@@ -32,6 +32,10 @@ export default function MainPage() {
     }
 
     function resetEverything() {
+        if(model.getItems().length != 0) {
+            alert("please auction all items before ending the auction. you did add them after all.")
+            return
+        }
         router.push(`../`)
         andRefreshDisplay()
     }
