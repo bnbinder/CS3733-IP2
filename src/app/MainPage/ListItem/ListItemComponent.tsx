@@ -38,7 +38,7 @@ export default function ListItemComponent(props: any) {
                 !props.model.getAuctionStarted() && (
                     <div className={styles.remove}>
                         <button onClick={(e) => {
-                            e.stopPropagation(); // prevents div's onClick
+                            e.stopPropagation();
                             deleteItem();
                         }}>Remove</button>
                     </div>

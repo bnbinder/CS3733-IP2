@@ -55,8 +55,8 @@ export default function MainPage() {
                 <div className={styles.info}>
                     <ListComponent andRefreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
                     <CurrentItemComponent andRefreshDisplay={andRefreshDisplay} model={model} item={item} sendUp={setItem}
-                        started={getStarted} />
-                    <AddItem andRefreshDisplay={andRefreshDisplay} model={model} started={getStarted} item={item} />
+                        getStarted={getStarted} />
+                    <AddItem andRefreshDisplay={andRefreshDisplay} model={model} getStarted={getStarted} item={item} />
                     <SoldItemComponent andRefreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
                     <CurrentBidsListComponent andRefreshDisplay={andRefreshDisplay} model={model} item={item} />
                 </div>

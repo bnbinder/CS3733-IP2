@@ -35,7 +35,7 @@ export default function AddItem(props: any) {
     }
 
     function addBids() {
-        if (formData.name == "" || formData.description == "") {
+        if (formData.name == "") {
             alert("can you please type something? thanks. we need the guy to exist.")
             return
         }
@@ -54,8 +54,8 @@ export default function AddItem(props: any) {
         props.andRefreshDisplay()
     }
 
-    function warningTextConditional() {
-        return props.started() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded()
+    function pleaseStartAuctionConditional() {
+        return props.getStarted() && !props.item.getItemBeingBidded() && !props.model.getItemBeingBidded()
     }
 
     return (
@@ -94,16 +94,16 @@ export default function AddItem(props: any) {
             </div>
             <br />
             <div className={styles.buttons}>
-                {!props.started() && (
+                {!props.getStarted() && (
                     <button onClick={addItem} type="submit" className={styles.additem}>Add Item</button>
                 )}
-                {props.started() && props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
+                {props.getStarted() && props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
                     <button onClick={addBids} type="submit" className={styles.additem}>Add Bid</button>
                 )}
-                {props.started() && !props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
+                {props.getStarted() && !props.item.getItemBeingBidded() && props.model.getItemBeingBidded() && (
                     <h3 className={styles.addItem}>Something Is Currently Being Auctioned</h3>
                 )}
-                {warningTextConditional() && (
+                {pleaseStartAuctionConditional() && (
                     <h1 className={styles.addItem} key = {"e"}>Please Start An Auction</h1>
                 )}
             </div>
