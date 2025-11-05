@@ -3,17 +3,12 @@
 import React from "react";
 import styles from "./AddItem.module.css";
 
-function ListComponent(props: any) {
-    const [model, setModel] = React.useState(props.model)
+export default function AddItem(props: any) {
     const [formData, setFormData] = React.useState({
         name: '',
         initialBid: 0,
         description: '',
     });
-
-    function andRefreshDisplay() {
-        props.refreshDisplay();
-    }
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -21,10 +16,10 @@ function ListComponent(props: any) {
             ...prevData,
             [name]: value,
         }));
-        andRefreshDisplay();
+        props.andRefreshDisplay();
     };
 
-    const addItem = () => {
+    function addItem() {
         if (formData.name == "" || formData.description == "") {
             alert("can you please type something? thanks. cant bid on nothing.")
             return
@@ -35,11 +30,11 @@ function ListComponent(props: any) {
         }
 
         setFormData({ name: "", initialBid: 0, description: "" })
-        model.addItem(formData.name, formData.initialBid, formData.description)
-        andRefreshDisplay()
+        props.model.addItem(formData.name, formData.initialBid, formData.description)
+        props.andRefreshDisplay()
     }
 
-    const addBids = () => {
+    function addBids() {
         if (formData.name == "" || formData.description == "") {
             alert("can you please type something? thanks. we need the guy to exist.")
             return
@@ -56,7 +51,7 @@ function ListComponent(props: any) {
         }
 
         setFormData({ name: "", initialBid: 0, description: "" })
-        andRefreshDisplay()
+        props.andRefreshDisplay()
     }
 
     function warningTextConditional() {
@@ -115,5 +110,3 @@ function ListComponent(props: any) {
         </div>
     );
 }
-
-export default ListComponent;

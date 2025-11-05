@@ -1,32 +1,24 @@
 "use client";
 
-import React from "react";
 import { Item } from "@/model";
 import styles from "./SoldItemComponent.module.css"
 import ListItemComponent from "../ListItem/ListItemComponent";
 
-function ListComponent(props: any) {
+export default function SoldItemComponent(props: any) {
 
-    const [model, setModel] = React.useState(props.model)
-
-    function andRefreshDisplay() {
-        props.refreshDisplay();
-    }
-
-    const sendItem = (item: Item) => {
+    function sendUp (item: Item) {
         props.sendUp(item);
-        andRefreshDisplay();
+        props.andRefreshDisplay();
     };
-    
 
     return (
         <div>
             <div className={styles.roundedbox}>
                 <h1 className={styles.header}>Sold Items</h1>
                 <ul id="items" className={styles.list}>
-                    {model.getSoldItems().map((item: Item) => (
-                        <li key={item.getKey()} onClick={() => sendItem(item)}>
-                            <ListItemComponent  item={item} model={model} refreshDisplay={andRefreshDisplay} sendUp={sendItem} />
+                    {props.model.getSoldItems().map((item: Item) => (
+                        <li key={item.getKey()} onClick={() => sendUp(item)}>
+                            <ListItemComponent  item={item} model={props.model} andRefreshDisplay={props.andRefreshDisplay} sendUp={sendUp} />
                         </li>
                     ))}
                 </ul>
@@ -34,5 +26,3 @@ function ListComponent(props: any) {
         </div>
     );
 }
-
-export default ListComponent;

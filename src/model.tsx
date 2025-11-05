@@ -25,7 +25,7 @@ export class Bid {
 }
 
 export class Item {
-    name: string;
+    private name: string;
     private initialBid: number;
     private description: string;
     private imageSrc: string;
@@ -33,7 +33,7 @@ export class Item {
     private itemBeingBidded: boolean;
     private bids: Bid[];
     private topBid: Bid;
-    key: number;
+    private key: number;
 
     constructor(name: string, initialBid: number, description: string) {
         this.name = name;
@@ -93,12 +93,20 @@ export class Item {
         return this.itemBeingBidded;
     }
 
-    setTopBid(bid:Bid) {
+    setTopBid(bid: Bid) {
         this.topBid = bid
     }
 
     getTopBid() {
         return this.topBid
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getDescription() {
+        return this.description
     }
 }
 

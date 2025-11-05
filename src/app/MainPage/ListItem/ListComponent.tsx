@@ -1,21 +1,14 @@
 "use client";
 
-import React from "react";
 import styles from "./ListComponent.module.css";
 import { Item } from "@/model";
 import ListItemComponent from "./ListItemComponent";
 
-function ListComponent(props: any) {
+export default function ListComponent(props: any) {
 
-    const [model, setModel] = React.useState(props.model)
-
-    function andRefreshDisplay() {
-        props.refreshDisplay();
-    }
-
-    const sendItem = (item: Item) => {
+    function sendUp(item: Item) {
         props.sendUp(item);
-        andRefreshDisplay();
+        props.andRefreshDisplay();
     };
 
     return (
@@ -23,9 +16,9 @@ function ListComponent(props: any) {
             <div className={styles.roundedbox}>
                 <h1 className={styles.header}>Current Items</h1>
                 <ul id="items" className={styles.list}>
-                    {model.getItems().map((item: Item) => (
+                    {props.model.getItems().map((item: Item) => (
                         <li key={item.getKey()}>
-                            <ListItemComponent item={item} model={model} refreshDisplay={andRefreshDisplay} sendUp={sendItem} />
+                            <ListItemComponent item={item} model={props.model} andRefreshDisplay={props.andRefreshDisplay} sendUp={sendUp} />
                         </li>
                     ))}
                 </ul>
@@ -33,5 +26,3 @@ function ListComponent(props: any) {
         </div>
     );
 }
-
-export default ListComponent;

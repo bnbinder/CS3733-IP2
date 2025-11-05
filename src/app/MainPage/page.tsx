@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./MainPage.module.css";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ListComponent from "./ListItem/ListComponent";
 import React from "react";
 import { Item, Model } from '@/model';
@@ -14,10 +14,9 @@ export default function MainPage() {
     const searchParams = useSearchParams();
     const eventStr = searchParams.get("name") || "No Event Name Given";
     const [model, setModel] = React.useState(new Model(eventStr))
-
     const [item, setItem] = React.useState(new Item("", -1, ""));
-
     const [redraw, forceRedraw] = React.useState(0)
+    const router = useRouter();
 
     function andRefreshDisplay() {
         forceRedraw(redraw + 1)
@@ -32,9 +31,9 @@ export default function MainPage() {
         return model.getAuctionStarted();
     }
 
-    function inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam() {
-        alert("THIS IS THE END >:)")
-        andRefreshDisplay();
+    function resetEverything() {
+        router.push(`../`)
+        andRefreshDisplay()
     }
 
     return (
@@ -48,18 +47,18 @@ export default function MainPage() {
                     {model.getAuctionStarted() && (
                         <div>
                             <h2>Total Funds: {0 + model.getTotalFunds()}</h2>
-                            <button onClick={inlineconditionalsdontallowsimplevoidfunctionsiactuallythinkthereforeiam} className={styles.startauction}>End Auction</button>
+                            <button onClick={resetEverything} className={styles.startauction}>End Auction</button>
                         </div>
                     )}
                 </div>
                 <br />
                 <div className={styles.info}>
-                    <ListComponent refreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
-                    <CurrentItemComponent refreshDisplay={andRefreshDisplay} model={model} item={item} sendUp={setItem}
+                    <ListComponent andRefreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
+                    <CurrentItemComponent andRefreshDisplay={andRefreshDisplay} model={model} item={item} sendUp={setItem}
                         started={getStarted} />
-                    <AddItem refreshDisplay={andRefreshDisplay} model={model} started={getStarted} item={item} />
-                    <SoldItemComponent refreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
-                    <CurrentBidsListComponent refreshDisplay={andRefreshDisplay} model={model} item={item} />
+                    <AddItem andRefreshDisplay={andRefreshDisplay} model={model} started={getStarted} item={item} />
+                    <SoldItemComponent andRefreshDisplay={andRefreshDisplay} model={model} sendUp={setItem} />
+                    <CurrentBidsListComponent andRefreshDisplay={andRefreshDisplay} model={model} item={item} />
                 </div>
             </main>
         </div>

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from "react";
 import styles from "./Input.module.css";
 import { useRouter } from "next/navigation";
 
-function InputComponent() {
-    const [inputValue, setInputValue] = useState('');
+export default function InputComponent() {
+    const [inputValue, setInputValue] = React.useState('');
     const router = useRouter();
 
     const handleChange = (event: any) => {
@@ -32,5 +32,3 @@ function InputComponent() {
         </form>
     );
 }
-
-export default InputComponent;

@@ -1,18 +1,12 @@
 "use client";
 
-import React from "react";
 import styles from "./ListBidComponent.module.css";
-import { Item } from "@/model";
 
-function ListComponent(props: any) {
-
-    function andRefreshDisplay() {
-        props.refreshDisplay();
-    }
+export default function ListBidComponent(props: any) {
 
     function deleteBid() {
         props.item.removeBid(props.bid.getKey());
-        andRefreshDisplay();
+        props.andRefreshDisplay();
     }
 
     return (
@@ -26,7 +20,7 @@ function ListComponent(props: any) {
             {props.model.getAuctionStarted() && !props.item.getAuctioned() && (
                 <div className={styles.remove}>
                     <button onClick={(e) => {
-                        e.stopPropagation(); // prevents div's onClick
+                        e.stopPropagation();
                         deleteBid();
                     }}>Remove</button>
                 </div>
@@ -34,5 +28,3 @@ function ListComponent(props: any) {
         </div>
     );
 }
-
-export default ListComponent;

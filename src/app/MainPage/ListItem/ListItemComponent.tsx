@@ -1,34 +1,27 @@
 "use client";
 
-import React from "react";
 import styles from "./ListItemComponent.module.css";
 import { Item } from "@/model";
 
-function ListComponent(props: any) {
+export default function ListItemComponent(props: any) {
 
-    const [model, setModel] = React.useState(props.model)
-
-    function andRefreshDisplay() {
-        props.refreshDisplay();
-    }
-
-    const sendItem = (item: Item) => {
+    function sendUp(item: Item) {
         if (!item.getAuctioned()) {
             props.sendUp(item);
         }
-        andRefreshDisplay();
+        props.andRefreshDisplay();
     };
 
     function deleteItem() {
-        model.removeItem(props.item.getKey());
-        sendItem(new Item("", -1, ""))
-        andRefreshDisplay();
+        props.model.removeItem(props.item.getKey());
+        sendUp(new Item("", -1, ""))
+        props.andRefreshDisplay();
     }
 
     return (
-        <div onClick={() => sendItem(props.item)} className={styles.roundedbox}>
+        <div onClick={() => sendUp(props.item)} className={styles.roundedbox}>
             <div className={styles.name}>
-                <p className={styles.par}>{props.item.name}</p>
+                <p className={styles.par}>{props.item.getName()}</p>
             </div>
             <div className={styles.bid}>
                 {(!props.model.getAuctionStarted() &&
@@ -54,5 +47,3 @@ function ListComponent(props: any) {
         </div >
     );
 }
-
-export default ListComponent;
