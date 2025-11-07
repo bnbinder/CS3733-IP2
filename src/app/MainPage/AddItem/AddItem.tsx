@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./AddItem.module.css";
-import { Bid, Item, Model } from "@/model";
+import { Bid, Item, Model } from "../../../model";
 
 export interface AddItemProps {
     item: Item
@@ -10,7 +10,6 @@ export interface AddItemProps {
     andRefreshDisplay: () => void
     getStarted: () => boolean
 }
-
 
 export default function AddItem(props: AddItemProps) {
     const [formData, setFormData] = React.useState({
@@ -30,11 +29,11 @@ export default function AddItem(props: AddItemProps) {
 
     function addItem() {
         if (formData.name == "" || formData.description == "") {
-            alert("can you please type something? thanks. cant bid on nothing.")
+            alert("please type a name and description.")
             return
         }
         else if (Number.isNaN(formData.initialBid)) {
-            alert("can you please type a number? thanks.")
+            alert("please type a valid number.")
             return
         }
 
@@ -51,18 +50,18 @@ export default function AddItem(props: AddItemProps) {
         }
 
         if (formData.name == "") {
-            alert("can you please type something? thanks. we need the guy to exist.")
+            alert("please type a name.")
             return
         }
         else if (Number.isNaN(formData.initialBid)) {
-            alert("can you please type a number? thanks.")
+            alert("please type a valid number.")
             return
         }
         if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() < formData.initialBid && topBidObject.getBid() < formData.initialBid) {
             props.item.addBid(formData.name, formData.initialBid, formData.description)
         }
         else {
-            alert("the bid needs to be higher than the inital bid!!! thanks")
+            alert("Please make sure the bid is higher than the initial bid and any bids presently active.")
         }
 
         setFormData({ name: "", initialBid: 0, description: "" })
