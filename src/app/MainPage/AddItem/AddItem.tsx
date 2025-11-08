@@ -32,7 +32,7 @@ export default function AddItem(props: AddItemProps) {
             alert("please type a name and description.")
             return
         }
-        else if (Number.isNaN(formData.initialBid)) {
+        else if (Number.isNaN(parseInt(formData.initialBid.toString()))) {
             alert("please type a valid number.")
             return
         }
@@ -53,7 +53,7 @@ export default function AddItem(props: AddItemProps) {
             alert("please type a name.")
             return
         }
-        else if (Number.isNaN(formData.initialBid)) {
+        else if (Number.isNaN(parseInt(formData.initialBid.toString()))) {
             alert("please type a valid number.")
             return
         }
