@@ -57,7 +57,7 @@ export default function AddItem(props: AddItemProps) {
             alert("please type a valid number.")
             return
         }
-        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() < formData.initialBid && topBidObject.getBid() < formData.initialBid) {
+        if (props.item.getInitialBid() != -1 && !props.item.getAuctioned() && props.item.getInitialBid() < Number(formData.initialBid) && topBidObject.getBid() < formData.initialBid) {
             props.item.addBid(formData.name, formData.initialBid, formData.description)
         }
         else {
