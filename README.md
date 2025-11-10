@@ -2,6 +2,8 @@
 ## Welcome To My IP2!
 This is a guide for how to use my IP2. When you succesfully install all the modules required, you can run the program. Please make sure the window for the program is in full screen or this guide will not make sense. The video below is me running the program according to the rubric. Everything worked properly. If you need help going through this refer to the notes and video below.
 
+[![Watch the video](https://img.youtube.com/vi/Kgki8BsGxI0/0.jpg)](https://youtu.be/Kgki8BsGxI0)
+
 ## The Components
 There are five different components on the main screen. After the start page, you will see them. On the top from left to right there is: Current Items, Current Item, Add Item/Bid. On the bottom from left to right there is: Sold Items, Current Bids.
 -  The Current Items component shows all the current items. Pre auction, this is where you can view and remove items you have added. To view them, click an item to put it on the Current Item component. During the auction, this is where you can view the items and select them to view them. Once an item is sold, it is removed from this component
