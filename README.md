@@ -1,6 +1,6 @@
 # CS3733-IP2
 ## Welcome To My IP2!
-This is a guide for how to use my IP2. When you succesfully install all the modules required, you can run the program. Please make sure the window for the program is in full screen or this guide will not make sense. The video below is me running the program according to the rubric. Everything worked properly. If you need help going through this refer to the notes and video below.
+This is a guide for how to use my IP2. When you succesfully install all the modules required, you can run the program. Please make sure the window for the program is in full screen or this guide will not make sense. The video below is me running the program according to the rubric. Everything worked properly. If you need help going through this refer to the notes and video below. Please also see the "prompts.txt" file for all my ChatGPT prompts.
 
 [![Watch the video](https://img.youtube.com/vi/Kgki8BsGxI0/0.jpg)](https://youtu.be/Kgki8BsGxI0)
 
