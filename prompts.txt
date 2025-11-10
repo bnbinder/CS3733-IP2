@@ -1,0 +1,13 @@
+make css file to make the input and button fancy and bigger
+
+submit button move to differnt page
+
+i have a starting page with an input component. this component saves the input and navigates to a new page. this new page uses the saved input as the title. im using a string, however, when i reload the page the string resets and the title disappears
+
+make three cs classes for three list items. the first list item is the name of the item, which should be big but not to tall but wide. the next is a number which should be small and not to tall but wide. the next is the description which should be small but tall and wide
+
+i have a list that is generated dynamically and each list item is wrapped in <button key = {item.getKey()} onClick={() => sendItem(item)}> <li><ListItemComponent item={item}/></li> </button> the button component is adding unessesary background color toeach list item. but when i remove it functionality in other components stops. i cant add items by pressing a button. why
+
+i have a div that is a clickable but a remove buttoninside the div how do i make the remove button work
+
+is there any way to get the bid that has the max value from this? Math.max(...item.getBids().map(bid => bid.getBid()))
