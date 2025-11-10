@@ -190,11 +190,7 @@ export class Model implements IModel {
             var topBidObject = item.getBids().reduce((max, bid) =>
                 bid.getBid() > max.getBid() ? bid : max)
             var iteminitbid: number = item.getInitialBid()
-            if (topBid > iteminitbid) { 
-                /* i am pretty sure this logic is covered with new 
-                .. "bid greater than top bid and init bid" logic with 
-                .. solving issue commit. will test by removing this
-                */ 
+            if (topBid > iteminitbid) {
                 this.totalFunds += topBid - iteminitbid;
                 item.setTopBid(topBidObject);
                 console.log(this.totalFunds)
